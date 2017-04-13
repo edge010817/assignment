@@ -9,12 +9,6 @@ import java.util.Random;
 //3つの数字すべてがヒットになったら、ゲームクリア
 
 public class hitblow {
-	private Random ran;
-
-	public hitblow(){
-		ran = new Random();
-	}
-
 	public static void main(String[] args){
 		int[] question = new int[3];
 		int[] answer = new int[3];
