@@ -17,6 +17,7 @@ class calTools {
 	private int end;
 	private int cnt;
 
+	//年月の入力
 	public void input(){
 		Scanner scan = new Scanner(System.in);
 		while(true){
@@ -33,6 +34,7 @@ class calTools {
 		}
 	}
 
+	//月末の日を返す
 	public int eod(){
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
@@ -40,6 +42,7 @@ class calTools {
 		return cal.getActualMaximum(Calendar.DATE);
 	}
 
+	//カレンダー出力処理
 	public void outCal(){
 		println(year + "年" + month + "月");
 		println("日 月 火 水 木 金 土");
@@ -73,18 +76,16 @@ class calTools {
 	} 
 
 	//0 1 2 3 4 5 6
-	//土日月火水木金
+	//日月火水木金土
 	//ただし、1月は13月 2月は14月
 	//m = 1,2の場合は、y=y-1,m=m+12
 	//h = (y + (y/4) - (y/100) + (y/400) + ((13*m+8)/5) + d) % 7
 	public int zeller(int y, int m){
 		if(month == 1){
 			y--;
-			//m += 12;
 			m = 13;
 		}else if(month == 2){
 			y--;
-			//m += 13;
 			m = 14;
 		}
 		//return (y + y/4 - y/100 + y/400 + (13*m+8)/5 + 1) % 7;
