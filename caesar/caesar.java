@@ -4,25 +4,7 @@ class caesar {
 	public static void main(String[] args){
 		boolean flg = false;
 		caesarProc cp = new caesarProc();
-		Scanner scan = new Scanner(System.in);
-		int k = scan.nextInt();
-		for(int l=0;l<k;l++){
-			cp.shift();
-		}
-		System.out.println(cp.getString());
-		/*for(int k=0;k<29;k++){
-			cp.shift();
-			if(cp.decipher()){
-				flg = true;
-				break;
-			}
-		}
-		if(flg == true){
-			System.out.println("解読に成功しました");
-			System.out.println(cp.getString());
-		}else{
-			System.out.println("解読に失敗しました");
-		}*/
+		cp.decipher();
 	}
 }
 
@@ -31,50 +13,37 @@ class caesarProc{
 	private String usableCode = "abcdefghijklmnopqrstuvwxyz .,-";
 	private String hintCode = "person";
 	private StringBuilder sb;
+	private int index;
 
 	public caesarProc(){
 		sb = new StringBuilder();
 		sb.append(code);
+		index = 0;
 	}
 
-	public boolean decipher(){
-		for(int i=0;i<code.length();i++){
-			for(int j=0;j<hintCode.length();j++){
-				if(code.charAt(i) != hintCode.charAt(j)){
-					break;
-				}else if(code.charAt(i) == hintCode.charAt(j) && j == 5){
-					return true;
-				}
-			}
+	public void decipher(){
+		for(int c=0;c<sb.length();c++){
+			shift();
+			if(sb.indexOf(hintCode) != -1){
+				System.out.println("解読に成功しました\n" + (c+1) + "回シフトしました\n"  + sb.toString());
+				break;
+			}	
 		}
-		return false;
 	}
 
 	public void shift(){
 		for(int i=0;i<sb.length();i++){
 			for(int j=0;j<usableCode.length();j++){
 				if(sb.charAt(i) == usableCode.charAt(j)){
-					if(j > 28){
-						//sb.append(usableCode.charAt(0));
+					if(j >= usableCode.length()-1){
 						sb.setCharAt(i, usableCode.charAt(0));
 					}else{
-						//sb.append(usableCode.charAt(j+1));
-						sb.setCharAt(i, usableCode.charAt(j+1));	
+						sb.setCharAt(i, usableCode.charAt(j+1));
+						break;
 					}
-					break;
-				}else if(sb.charAt(i) == ';'){
-					break;
 				}
+
 			}
 		}
-	}
-
-	/*public void delete(){
-		//sb.delete(0, 29);
-		sb.setLength(0);
-	}*/
-
-	public String getString(){
-		return sb.toString();
 	}
 }
