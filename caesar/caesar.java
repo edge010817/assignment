@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 class caesar { 
 	public static void main(String[] args){
-		boolean flg = false;
 		caesarProc cp = new caesarProc();
 		cp.decipher();
 	}
