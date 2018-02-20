@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 class RPN {
 	public static void main(String[] args){
+		//最終的に数値スタックに、演算子スタックの値がPushされる
 		Deque<String> stack = new ArrayDeque<String>();		//数値スタック
 		Deque<String> stack2 = new ArrayDeque<String>();	//演算子スタック
 
@@ -13,7 +14,7 @@ class RPN {
 
 		while(true){
 			System.out.print(">");
-			str = scan.next();
+			str = scan.next();		//数値または演算子を入力
 			
 			//=が入力された時の処理
 			if(str.equals("=")){
@@ -30,11 +31,11 @@ class RPN {
 			}
 
 			try{
-				//数値
 				num = Integer.parseInt(str);
+				//数値をPush
 				stack.offerFirst(str);
+			//演算子が入力された時
 			}catch(NumberFormatException e){
-				//演算子
 				//スタックが0のとき
 				if(stack2.size() == 0){	
 					stack2.offerFirst(str);
@@ -54,11 +55,12 @@ class RPN {
 					stack2.offerFirst(str);
 				}
 			}
-			test(stack);
-			test(stack2);
+			test(stack);	//数値スタックを全て表示
+			test(stack2);	//演算子スタックを全て表示
 		}
 	}
 
+	//スタックの中身を全て表示する
 	public static void test(Deque<String> deque){
 		System.out.print("|");
 		String[] tmp = deque.toArray(new String[0]);
