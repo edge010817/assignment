@@ -2,10 +2,6 @@ import java.util.Deque;
 import java.util.ArrayDeque;
 import java.util.Scanner;
 
-//push			pop			参照
-//offerFirst	pollFirst 	peekFirst
-//offerLast		pollLast	peekLast
-
 class RPN {
 	public static void main(String[] args){
 		Deque<String> stack = new ArrayDeque<String>();		//数値スタック
