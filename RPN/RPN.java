@@ -47,11 +47,13 @@ class RPN {
 				test(stack2);
 				break;
 			}else if(!numMatch(in) && !opMatch(in)){
-				System.out.println("数値、演算子以外は入力できません");
+				System.out.println("! 数値、演算子以外は入力できません");
 			}else{
 				reversePolish(in);
 			}
 		}
+
+		calculation();
 	}
 
 	//入力処理
@@ -89,6 +91,40 @@ class RPN {
 		}
 		test(stack);
 		test(stack2);
+	}
+
+	//逆ポーランドの計算
+	public static void calculation(){
+		int num, num2;
+		Deque<String> cal = new ArrayDeque<String>();
+
+		while(stack.size() != 0){
+			if(numMatch(stack.peekFirst())){
+				System.out.println("test");
+				cal.offerFirst(stack.pollFirst());
+				System.out.println("test2");
+			}else if(opMatch(stack.peekFirst())){
+				num2 = Integer.parseInt(cal.pollFirst());
+				num = Integer.parseInt(cal.pollFirst());
+				switch(stack.pollFirst()){
+					case "+":
+						cal.offerFirst(String.valueOf(num + num2));
+						break;
+					case "-":
+						cal.offerFirst(String.valueOf(num - num2));
+						break;
+					case "*":
+						cal.offerFirst(String.valueOf(num * num2));
+						break;
+					case "/":
+						cal.offerFirst(String.valueOf(num / num2));
+						break;
+				}
+			}
+			test(cal);
+		}
+
+		System.out.println("A>" + cal.pollFirst());
 	}
 
 	//数値とマッチしているか確認
