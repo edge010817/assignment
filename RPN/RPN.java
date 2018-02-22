@@ -9,7 +9,6 @@ class RPN {
 		private static Deque<String> stack2 = new ArrayDeque<String>();	//演算子スタック
 		private static Scanner scan = new Scanner(System.in);
 		private static String[] op = {"+", "-", "*", "/"};
-		private static String[] number = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 	public static void main(String[] args){
 		boolean match;
@@ -19,7 +18,7 @@ class RPN {
 		while(true){
 			in = input();
 
-			if(in.equals(number[0])){
+			if(in.equals("0")){
 				System.out.println("! 最初に0は入力できません");
 			}else if(opMatch(in)){
 				System.out.println("! 最初に演算子は入力できません");
@@ -35,10 +34,8 @@ class RPN {
 		while(true){
 			in = input();
 
-			if(!numMatch(in) && !opMatch(in)){
-				System.out.println("数値、演算子以外は入力できません");
 			//=が入力された時の処理
-			}else if(in.equals("=")){
+			if(in.equals("=")){
 				while(true){
 					try{
 						stack.offerFirst(stack2.pollFirst());
@@ -49,6 +46,8 @@ class RPN {
 				test(stack);
 				test(stack2);
 				break;
+			}else if(!numMatch(in) && !opMatch(in)){
+				System.out.println("数値、演算子以外は入力できません");
 			}else{
 				reversePolish(in);
 			}
@@ -94,12 +93,12 @@ class RPN {
 
 	//数値とマッチしているか確認
 	public static boolean numMatch(String str){
-		for(String tmp: number){
-			if(str.equals(tmp)){
-				return true;
-			}
+		try{
+			int num = Integer.parseInt(str);
+			return true;
+		}catch(NumberFormatException e){
+			return false;
 		}
-		return false;
 	}
 
 	//演算子とマッチしているか確認
