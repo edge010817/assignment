@@ -46,8 +46,6 @@ class RPN {
 				System.out.println("stack >" + stack);
 				System.out.println("stack2>" + stack2);
 				System.out.println();
-				//test(stack);
-				//test(stack2);
 				break;
 			}else if(!numMatch(in) && !opMatch(in)){
 				System.out.println("! 数値、演算子以外は入力できません");
@@ -93,8 +91,6 @@ class RPN {
 		}
 		System.out.println("stack >" + stack);
 		System.out.println("stack2>" + stack2);
-		//test(stack);
-		//test(stack2);
 	}
 
 	//逆ポーランドの計算
@@ -128,7 +124,6 @@ class RPN {
 			System.out.println("stack2>" + stack2);
 			System.out.println("cal   >" + cal);
 			System.out.println();
-			//test(cal);
 		}
 
 		System.out.println("A>" + cal.pollFirst());
@@ -153,14 +148,4 @@ class RPN {
 		}
 		return false;
 	}
-
-	//スタックの中身を全て表示する
-	public static void test(Deque<String> deque){
-		System.out.print("|");
-		String[] tmp = deque.toArray(new String[0]);
-		for(int i=tmp.length-1;i>=0;i--){
-			System.out.print(tmp[i] + "|");
-		}
-		System.out.println();
-	}	
 }
