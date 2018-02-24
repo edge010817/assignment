@@ -43,8 +43,11 @@ class RPN {
 						break;
 					}
 				}
-				test(stack);
-				test(stack2);
+				System.out.println("stack >" + stack);
+				System.out.println("stack2>" + stack2);
+				System.out.println();
+				//test(stack);
+				//test(stack2);
 				break;
 			}else if(!numMatch(in) && !opMatch(in)){
 				System.out.println("! 数値、演算子以外は入力できません");
@@ -52,7 +55,6 @@ class RPN {
 				reversePolish(in);
 			}
 		}
-
 		calculation();
 	}
 
@@ -89,8 +91,10 @@ class RPN {
 				stack2.offerFirst(str);
 			}
 		}
-		test(stack);
-		test(stack2);
+		System.out.println("stack >" + stack);
+		System.out.println("stack2>" + stack2);
+		//test(stack);
+		//test(stack2);
 	}
 
 	//逆ポーランドの計算
@@ -99,14 +103,13 @@ class RPN {
 		Deque<String> cal = new ArrayDeque<String>();
 
 		while(stack.size() != 0){
-			if(numMatch(stack.peekFirst())){
-				System.out.println("test");
-				cal.offerFirst(stack.pollFirst());
-				System.out.println("test2");
-			}else if(opMatch(stack.peekFirst())){
+			if(numMatch(stack.peekLast())){
+				cal.offerFirst(stack.pollLast());
+			}else if(opMatch(stack.peekLast())){
 				num2 = Integer.parseInt(cal.pollFirst());
 				num = Integer.parseInt(cal.pollFirst());
-				switch(stack.pollFirst()){
+				System.out.println(num + stack.peekLast()  + num2);
+				switch(stack.pollLast()){
 					case "+":
 						cal.offerFirst(String.valueOf(num + num2));
 						break;
@@ -121,7 +124,11 @@ class RPN {
 						break;
 				}
 			}
-			test(cal);
+			System.out.println("stack >" + stack);
+			System.out.println("stack2>" + stack2);
+			System.out.println("cal   >" + cal);
+			System.out.println();
+			//test(cal);
 		}
 
 		System.out.println("A>" + cal.pollFirst());
