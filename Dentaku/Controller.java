@@ -15,6 +15,7 @@ public class Controller {
     Alert dialog;
     String label;
     String num;
+    String num2;
     String op;
     String op_keep;
     String buttonText;
@@ -52,14 +53,18 @@ public class Controller {
             if (buttonText.matches("[0-9]+")) {
                 //演算子の選択が完了したとき
                 if (!op_keep.isEmpty()) {
+                    //計算結果を保持する変数に何も入っていないとき
                     if(num.isEmpty()) {
                         op = op_keep;
                         op_keep = "";
                         this.totalLabel.setText(label + buttonText);
-                    }else{
+                    //演算子が確定してないとき
+                    }else if(op.isEmpty()){
                         op = op_keep;
                         op_keep = "";
                         this.totalLabel.setText(buttonText);
+                    }else{
+                        this.totalLabel.setText("");
                     }
                 //演算子が選択されていないとき
                 } else {
@@ -97,6 +102,7 @@ public class Controller {
 
     }
 
+    //四則演算
     public String cal(String number1, String number2, String operator){
         int sum = 0;
         int n1 = toInt(number1);
@@ -119,6 +125,7 @@ public class Controller {
         return String.valueOf(sum);
     }
 
+    //String型をint型に変換
     public int toInt(String str){
         return Integer.parseInt(str);
     }
