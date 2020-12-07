@@ -6,9 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 public class Controller {
 
     @FXML Label totalLabel;
@@ -51,14 +48,14 @@ public class Controller {
 
             //数字ボタンを押したとき
             if (buttonText.matches("[0-9]+")) {
-                //演算子の選択が完了したとき
+                //演算子の選択が確定していないとき
                 if (!op_keep.isEmpty()) {
                     //計算結果を保持する変数に何も入っていないとき
                     if(num.isEmpty()) {
                         op = op_keep;
                         op_keep = "";
                         this.totalLabel.setText(label + buttonText);
-                    //演算子が確定してないとき
+                    //数字ボタンが押されたので、演算子を確定する
                     }else if(op.isEmpty()){
                         op = op_keep;
                         op_keep = "";
@@ -95,7 +92,15 @@ public class Controller {
                 buttonText = "";
             //イコールを押したとき
             }else if(buttonText.equals("=")){
-
+                //演算子が確定している
+                if(!op.isEmpty() && !label.isEmpty()){
+                    num = cal(num, label, op);
+                    this.totalLabel.setText(num);
+                }else{
+                    this.totalLabel.setText(num);
+                }
+                op = "";
+                op_keep = "";
             }
             break;
         }
